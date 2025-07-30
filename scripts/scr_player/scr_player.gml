@@ -14,9 +14,10 @@ function movement()
     dx = move * PlayerValues.walkSpeed; // show_debug_message(string(dx))
     
     // jump
-    if (jump && place_meeting(x, y + 1, tilemap))
+    if (jump && PlayerValues.jumpCount < PlayerValues.maxJumps)
     {
         dy -= PlayerValues.jump
+        PlayerValues.jumpCount ++;
     }
     
     // collision horizontal
@@ -27,6 +28,11 @@ function movement()
     	    x = x + dx;
         }
     dx = 0 
+    }
+    
+    if (place_meeting(x, y + 1, tilemap))
+    {
+        PlayerValues.jumpCount = 0;
     }
        
     // left and right movement 
@@ -70,7 +76,7 @@ function standStateFunction()
 function walkStateFunction()
 {
     show_debug_message("walkStateFunction")
-    sprite_index = s_player_walk_right
+    sprite_index = s_player_walk_right;
 
     // states
     if (dy < 0)
@@ -96,7 +102,7 @@ function jumpStateFunction()
     show_debug_message("jumpStateFunction")
     
     // sprites
-     sprite_index = s_player_jump_right
+     sprite_index = s_player_jump_right;
     
     //states
     if (dy > 0)
@@ -115,6 +121,7 @@ function jumpStateFunction()
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 function fallStateFunction()
 {
+    // sprite_index = s_player_fall_right;
     show_debug_message("fallStateFunction")
     if (dy == 0)
     {

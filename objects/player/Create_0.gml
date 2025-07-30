@@ -9,7 +9,9 @@ enum playerStates
 PlayerValues =
 {
     walkSpeed : 2, 
-    jump : 5
+    jump : 5,
+    jumpCount : 0,
+    maxJumps: 1
 }
 
 dx = 0;
