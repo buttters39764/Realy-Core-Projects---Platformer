@@ -14,40 +14,34 @@ function movement()
     dx = move * PlayerValues.walkSpeed; // show_debug_message(string(dx))
     
     // jump
-    if (jump && PlayerValues.jumpCount < PlayerValues.maxJumps)
+    if (jump && place_meeting(x, y + 1, tilemap))
     {
         dy -= PlayerValues.jump
-        PlayerValues.jumpCount ++;
     }
     
     // collision horizontal
-    if (place_meeting(x + dx, y, tilemap))
+    if (place_meeting(x + sign(dx), y, tilemap))
     {
-        while (!place_meeting(x + dx, y, tilemap)) 
+        while (!place_meeting(x + sign(dx), y, tilemap)) 
         {
-    	    x = x + dx;
+    	    x += sign(dx)+1;
         }
     dx = 0 
     }
-    
-    if (place_meeting(x, y + 1, tilemap))
-    {
-        PlayerValues.jumpCount = 0;
-    }
        
     // left and right movement 
-     x = x + dx;
+     x += dx;
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 function applyGravity()
 { 
     dy += grv;
     
-    if (place_meeting(x, y + dy, tilemap))
+    if (place_meeting(x, y + sign(dy), tilemap))
     {
-        while (!place_meeting(x, y + dy, tilemap)) 
+        while (!place_meeting(x, y + sign(dy), tilemap)) 
         {
-            y = y + sign(dy)	
+            y += sign(dy)
         }
     dy = 0;
     }
@@ -58,7 +52,11 @@ function applyGravity()
 function standStateFunction()
 {
     show_debug_message("standStateFunction")
-    sprite_index = s_player_idle_right;
+    
+    // sprite
+    sprite_index = s_player_idle;
+    
+    // state
     if (dx == PlayerValues.walkSpeed || dx == -PlayerValues.walkSpeed)
     {
         playerState = playerStates.walk;
@@ -76,9 +74,11 @@ function standStateFunction()
 function walkStateFunction()
 {
     show_debug_message("walkStateFunction")
-    sprite_index = s_player_walk_right;
+    
+    // sprite
+    sprite_index = s_player_walk;
 
-    // states
+    // state
     if (dy < 0)
     {
         playerState = playerStates.jump;
@@ -101,10 +101,10 @@ function jumpStateFunction()
 {
     show_debug_message("jumpStateFunction")
     
-    // sprites
-     sprite_index = s_player_jump_right;
+    // sprite
+     sprite_index = s_player_jump;
     
-    //states
+    // state
     if (dy > 0)
     {
         playerState = playerStates.fall;
@@ -121,8 +121,13 @@ function jumpStateFunction()
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 function fallStateFunction()
 {
-    // sprite_index = s_player_fall_right;
+    
     show_debug_message("fallStateFunction")
+    
+    // sprite
+    // sprite_index = s_player_fall;
+    
+    // state
     if (dy == 0)
     {
         playerState = playerStates.stand;
