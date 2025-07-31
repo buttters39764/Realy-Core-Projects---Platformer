@@ -8,10 +8,8 @@ enum playerStates
 
 PlayerValues =
 {
-    walkSpeed : 4, 
+    walkSpeed : 3, 
     jump : 6,
-    jumpCount : 0,
-    maxJumps: 1
 }
 
 dx = 0;
@@ -22,3 +20,6 @@ tilemap = layer_tilemap_get_id("Tiles_Coll");
 
 playerState = playerStates.stand;
 playerScaleX = image_xscale;
+
+canDoubleJump = true;
+doubleJumpUsed = false;

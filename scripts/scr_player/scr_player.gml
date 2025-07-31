@@ -14,10 +14,27 @@ function movement()
     dx = move * PlayerValues.walkSpeed; // show_debug_message(string(dx))
     
     // jump
-    if (jump && place_meeting(x, y + 1, tilemap))
+    /*ww
+     if (jump && place_meeting(x, y + 1, tilemap))
     {
         dy -= PlayerValues.jump
     }
+    */
+    
+    // double jump
+    
+    if (jump)
+{
+    if (place_meeting(x, y + 1, tilemap)) {
+        dy = -PlayerValues.jump;
+        doubleJumpUsed = false; // újrakezdődik a ciklus
+    }
+    else if (canDoubleJump && !doubleJumpUsed)
+    {
+        dy = -PlayerValues.jump;
+        doubleJumpUsed = true;
+    }
+}
     
     // collision horizontal
     if (place_meeting(x + dx, y, tilemap))
@@ -65,7 +82,7 @@ function standStateFunction()
     {
         playerState = playerStates.jump;
     }
-    if (dy > 0)
+    if (dy > 0 && !place_meeting(x, y + 4, tilemap))
     {
         playerState = playerStates.fall;
     }
@@ -124,11 +141,29 @@ function fallStateFunction()
     
     show_debug_message("fallStateFunction")
     
+    // fix
+    
+    if (!place_meeting(x, y + 4, tilemap) && dy >= 0)
+    {
+        sprite_index = s_player_fall;
+    }
+    else
+    {
+    	if (dx == PlayerValues.walkSpeed || dx == -PlayerValues.walkSpeed)
+        {
+           sprite_index = s_player_walk;
+        }
+        else
+        {
+        	sprite_index = s_player_idle;
+        }
+    }
+    
     // sprite
-     sprite_index = s_player_fall;
+     //sprite_index = s_player_fall;
     
     // state
-    if (dy == 0)
+    if (place_meeting(x, y + 1, tilemap) && dy == 0)
     {
         playerState = playerStates.stand;
     }
