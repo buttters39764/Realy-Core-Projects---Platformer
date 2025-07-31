@@ -20,11 +20,11 @@ function movement()
     }
     
     // collision horizontal
-    if (place_meeting(x + sign(dx), y, tilemap))
+    if (place_meeting(x + dx, y, tilemap))
     {
         while (!place_meeting(x + sign(dx), y, tilemap)) 
         {
-    	    x += sign(dx)+1;
+    	    x += sign(dx);
         }
     dx = 0 
     }
@@ -37,7 +37,7 @@ function applyGravity()
 { 
     dy += grv;
     
-    if (place_meeting(x, y + sign(dy), tilemap))
+    if (place_meeting(x, y + dy, tilemap))
     {
         while (!place_meeting(x, y + sign(dy), tilemap)) 
         {
@@ -125,7 +125,7 @@ function fallStateFunction()
     show_debug_message("fallStateFunction")
     
     // sprite
-    // sprite_index = s_player_fall;
+     sprite_index = s_player_fall;
     
     // state
     if (dy == 0)

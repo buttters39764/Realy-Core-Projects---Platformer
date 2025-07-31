@@ -8,7 +8,7 @@ enum playerStates
 
 PlayerValues =
 {
-    walkSpeed : 2, 
+    walkSpeed : 4, 
     jump : 6,
     jumpCount : 0,
     maxJumps: 1
