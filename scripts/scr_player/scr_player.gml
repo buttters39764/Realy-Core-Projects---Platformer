@@ -167,5 +167,14 @@ function fallStateFunction()
     {
         playerState = playerStates.stand;
     }
+    
+    if (dx > 0)
+    {
+        image_xscale = playerScaleX;
+    }
+    else if (dx < 0)
+    {
+        image_xscale = -playerScaleX;
+    }
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------

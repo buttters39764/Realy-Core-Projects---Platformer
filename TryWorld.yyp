@@ -50,6 +50,7 @@
     {"id":{"name":"s_player_jump","path":"sprites/s_player_jump/s_player_jump.yy",},},
     {"id":{"name":"s_player_walk","path":"sprites/s_player_walk/s_player_walk.yy",},},
     {"id":{"name":"s_tilemap1","path":"sprites/s_tilemap1/s_tilemap1.yy",},},
+    {"id":{"name":"s_water","path":"sprites/s_water/s_water.yy",},},
     {"id":{"name":"TileSet_Coll","path":"tilesets/TileSet_Coll/TileSet_Coll.yy",},},
   ],
   "resourceType":"GMProject",
