@@ -22,4 +22,4 @@ playerState = playerStates.stand;
 playerScaleX = image_xscale;
 
 canDoubleJump = true;
-doubleJumpUsed = false;
+doubleJumpUsed = false; 
