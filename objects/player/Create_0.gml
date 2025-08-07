@@ -3,12 +3,14 @@ enum playerStates
     stand,
     jump,
     fall,
-    walk
+    walk,
+    run
 }
 
 PlayerValues =
 {
-    walkSpeed : 3, 
+    walkSpeed : 3,
+    runSpeed : 4,
     jump : 6.7,
 }
 

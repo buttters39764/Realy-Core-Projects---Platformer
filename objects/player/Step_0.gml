@@ -16,4 +16,6 @@ switch (playerState) {
     case playerStates.fall:
         fallStateFunction();
         break;
+    case playerStates.run:
+        runStatFunction()
 }

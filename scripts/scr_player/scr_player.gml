@@ -1,10 +1,11 @@
 function inputCheck()
 {
-    left = keyboard_check(ord("A"));
-    right = keyboard_check(ord("D"));
-    jump = keyboard_check_pressed(ord("W"));
+    left_key = keyboard_check(ord("A"));
+    right_key = keyboard_check(ord("D"));
+    jump_key = keyboard_check_pressed(ord("W"));
+    run_key = keyboard_check(vk_shift);
     
-    move = right - left;
+    move = right_key - left_key;
     
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -13,8 +14,15 @@ function movement()
     // horizontal movement
     dx = move * PlayerValues.walkSpeed; // show_debug_message(string(dx))
     
+    // run
+    
+    if (run_key)
+    {
+       dx = move * PlayerValues.runSpeed; 
+    }
+    
     // jump
-    /*ww
+    /*
      if (jump && place_meeting(x, y + 1, tilemap))
     {
         dy -= PlayerValues.jump
@@ -23,7 +31,7 @@ function movement()
     
     // double jump
     
-    if (jump)
+    if (jump_key)
 {
     if (place_meeting(x, y + 1, tilemap)) {
         dy = -PlayerValues.jump;
@@ -78,6 +86,10 @@ function standStateFunction()
     {
         playerState = playerStates.walk;
     }
+        if (dx == PlayerValues.runSpeed || dx == -PlayerValues.runSpeed)
+    {
+        playerState = playerStates.run;
+    }
     if (dy < 0)
     {
         playerState = playerStates.jump;
@@ -96,6 +108,10 @@ function walkStateFunction()
     sprite_index = s_player_walk;
 
     // state
+    if (dx == PlayerValues.runSpeed || dx == -PlayerValues.runSpeed)
+    {
+        playerState = playerStates.run;
+    }
     if (dy < 0)
     {
         playerState = playerStates.jump;
@@ -168,6 +184,30 @@ function fallStateFunction()
         playerState = playerStates.stand;
     }
     
+    if (dx > 0)
+    {
+        image_xscale = playerScaleX;
+    }
+    else if (dx < 0)
+    {
+        image_xscale = -playerScaleX;
+    }
+}
+//-----------------------------------------------------------------------------------------------------------------------------------------------------
+function runStatFunction()
+{
+     // sprinte
+    sprite_index = s_player_run;
+    
+     // state
+    if (dy < 0)
+    {
+        playerState = playerStates.jump;
+    }
+    if (dx == 0)
+    {
+        playerState = playerStates.stand;
+    }
     if (dx > 0)
     {
         image_xscale = playerScaleX;
