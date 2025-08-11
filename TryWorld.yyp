@@ -45,6 +45,7 @@
     {"id":{"name":"scr_player","path":"scripts/scr_player/scr_player.yy",},},
     {"id":{"name":"s_backgorund","path":"sprites/s_backgorund/s_backgorund.yy",},},
     {"id":{"name":"s_campfire","path":"sprites/s_campfire/s_campfire.yy",},},
+    {"id":{"name":"s_player_attack","path":"sprites/s_player_attack/s_player_attack.yy",},},
     {"id":{"name":"s_player_fall","path":"sprites/s_player_fall/s_player_fall.yy",},},
     {"id":{"name":"s_player_idle","path":"sprites/s_player_idle/s_player_idle.yy",},},
     {"id":{"name":"s_player_jump","path":"sprites/s_player_jump/s_player_jump.yy",},},

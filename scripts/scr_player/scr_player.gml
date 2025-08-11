@@ -4,6 +4,7 @@ function inputCheck()
     right_key = keyboard_check(ord("D"));
     jump_key = keyboard_check_pressed(ord("W"));
     run_key = keyboard_check(vk_shift);
+    attack_key = mouse_check_button_pressed(mb_left);
     
     move = right_key - left_key;
     
@@ -82,6 +83,12 @@ function standStateFunction()
     sprite_index = s_player_idle;
     
     // state
+    if (attack_key && dx == 0)
+    {
+        playerState = playerStates.attack;
+        image_index = 0;
+        exit;
+    }
     if (dx == PlayerValues.walkSpeed || dx == -PlayerValues.walkSpeed)
     {
         playerState = playerStates.walk;
@@ -108,6 +115,12 @@ function walkStateFunction()
     sprite_index = s_player_walk;
 
     // state
+    /*if (attack_key)
+    {
+        playerState = playerStates.attack;
+        image_index = 0;
+        exit;
+    }*/
     if (dx == PlayerValues.runSpeed || dx == -PlayerValues.runSpeed)
     {
         playerState = playerStates.run;
@@ -196,6 +209,8 @@ function fallStateFunction()
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 function runStatFunction()
 {
+    show_debug_message("runStateFunction");
+    
      // sprinte
     sprite_index = s_player_run;
     
@@ -218,3 +233,15 @@ function runStatFunction()
     }
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
+function attackStateFunction()
+{
+    show_debug_message("attackStateFunction");
+    
+    // sprite
+    sprite_index = s_player_attack;
+    
+    // state
+    if (image_index >= image_number - 1) {
+        playerState = playerStates.stand;
+    }
+}

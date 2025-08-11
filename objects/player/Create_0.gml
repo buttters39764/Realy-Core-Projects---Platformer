@@ -4,7 +4,8 @@ enum playerStates
     jump,
     fall,
     walk,
-    run
+    run,
+    attack
 }
 
 PlayerValues =

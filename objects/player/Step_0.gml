@@ -17,5 +17,9 @@ switch (playerState) {
         fallStateFunction();
         break;
     case playerStates.run:
-        runStatFunction()
+        runStatFunction();
+        break;
+    case playerStates.attack:
+        attackStateFunction();
+        break;
 }
